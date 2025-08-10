@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'app_theme/app_theme.dart';
@@ -9,7 +8,7 @@ import 'controller/color_provider.dart';
 import 'controller/icon_provider.dart';
 import 'controller/theme_provider.dart';
 import 'view/create_reminder.dart';
-import 'view/home_screen.dart';
+import 'view/bottomNavBar/bottom_nav_bar.dart';
 import 'view/intro_screen.dart';
 import 'view/settings_page.dart';
 
@@ -48,7 +47,7 @@ class MyApp extends StatelessWidget {
           themeMode: themeProvider.themeMode,
           routes: {
             '/introScreen': (context) => IntroScreen(),
-            '/homeScreen': (context) => HomeScreen(),
+            '/homeScreen': (context) => BottomNavBar(),
             '/settings': (context) => SettingsPage(),
             '/createReminder': (context) => NewReminderPage(),
           },

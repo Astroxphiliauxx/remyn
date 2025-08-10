@@ -27,18 +27,35 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2, 
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE reminders(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
             interval INTEGER NOT NULL, 
+            interval_minutes INTEGER DEFAULT 0,
             dateTime INTEGER NOT NULL, 
             weekday INTEGER NOT NULL,  
-            repeating INTEGER NOT NULL  
+            repeating INTEGER NOT NULL,
+            color INTEGER NOT NULL,
+            icon_code INTEGER NOT NULL
           )
         ''');
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+         
+          await db.transaction((txn) async {
+           
+            await txn.execute(
+              'ALTER TABLE reminders ADD COLUMN interval_minutes INTEGER DEFAULT 0');
+            await txn.execute(
+              'ALTER TABLE reminders ADD COLUMN color INTEGER NOT NULL DEFAULT 0xFF2196F3'); 
+            await txn.execute(
+              'ALTER TABLE reminders ADD COLUMN icon_code INTEGER NOT NULL DEFAULT 0xe3a3'); 
+          });
+        }
       },
     );
   }
@@ -51,5 +68,24 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getReminders() async {
     final db = await database;
     return await db.query('reminders');
+  }
+
+  Future<int> updateReminder(int id, Map<String, dynamic> reminder) async {
+    final db = await database;
+    return await db.update(
+      'reminders',
+      reminder,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<int> deleteReminder(int id) async {
+    final db = await database;
+    return await db.delete(
+      'reminders',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 }

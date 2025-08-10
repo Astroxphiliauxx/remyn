@@ -19,6 +19,9 @@ class _NewReminderPageState extends State<NewReminderPage> {
   bool dateTime = false;
   bool weekday = false;
   bool repeating = false;
+  int? selectedInterval;
+
+  final List<int> intervalOptions = [5, 10, 20, 30];
 
   final List<Color> colors = [
     Colors.blue,
@@ -93,7 +96,15 @@ class _NewReminderPageState extends State<NewReminderPage> {
                       ),
                     ),
 
-                    _buildToggleTile("Interval", interval, (value) => setState(() => interval = value)),
+                    _buildToggleTile("Interval", interval, (value) {
+                      setState(() {
+                        interval = value;
+                        if (!value) {
+                          selectedInterval = null; // Reset selection when toggled off
+                        }
+                      });
+                    }),
+                    if (interval) _buildIntervalOptions(), 
                     _buildToggleTile("Date & time", dateTime, (value) => setState(() => dateTime = value)),
                     _buildToggleTile("Weekday", weekday, (value) => setState(() => weekday = value)),
                     _buildToggleTile("Repeating", repeating, (value) => setState(() => repeating = value)),
@@ -200,6 +211,58 @@ class _NewReminderPageState extends State<NewReminderPage> {
     );
   }
 
+  Widget _buildIntervalOptions() {
+    final colorScheme = Theme.of(context).colorScheme;
+    final colorProvider = Provider.of<ColorProvider>(context);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+      child: Container(
+        width:  MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          color: colorScheme.secondary,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 8),
+            Text(
+              "Select Interval",
+              style: TextStyle(
+                color: colorScheme.onSurface,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: intervalOptions.map((minutes) {
+                return ChoiceChip(
+                  label: Text('$minutes mins'),
+                  selected: selectedInterval == minutes,
+                  onSelected: (selected) {
+                    setState(() {
+                      selectedInterval = selected ? minutes : null;
+                    });
+                  },
+                  selectedColor: colorProvider.selectedColor,
+                  labelStyle: TextStyle(
+                    color: selectedInterval == minutes 
+                      ? colorScheme.onPrimary 
+                      : colorScheme.onSurface,
+                  ),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildIconTile(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final iconProvider = Provider.of<IconProvider>(context);
@@ -265,6 +328,9 @@ class _NewReminderPageState extends State<NewReminderPage> {
 
   void _saveReminder(String title) async {
 
+     final colorProvider = Provider.of<ColorProvider>(context, listen: false);
+     final iconProvider = Provider.of<IconProvider>(context, listen: false);
+
 
     final dbHelper = DatabaseHelper();
     await dbHelper.insertReminder({
@@ -273,9 +339,12 @@ class _NewReminderPageState extends State<NewReminderPage> {
       'dateTime': dateTime ? 1 : 0,
       'weekday': weekday ? 1 : 0,
       'repeating': repeating ? 1 : 0,
+      'color': colorProvider.selectedColor.value, 
+      'icon_code': iconProvider.selectedIcon.codePoint,
     });
 
-    Navigator.pop(context, true);
+
+    Navigator.pop(context, true); 
   }
 
 }

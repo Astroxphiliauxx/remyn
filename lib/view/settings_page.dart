@@ -146,6 +146,6 @@ class SettingsPage extends StatelessWidget {
 
   Widget? _getSelectedThemeIcon(BuildContext context, ThemeMode mode) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    return themeProvider.themeMode == mode ? Icon(Icons.check, color: Theme.of(context).colorScheme.onBackground) : null;
+    return themeProvider.themeMode == mode ? Icon(Icons.check, color: Theme.of(context).colorScheme.onSurface) : null;
   }
 }

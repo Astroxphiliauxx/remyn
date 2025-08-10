@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/auto_scrolling_icons.dart';
-import 'components/auto_scrolling_icons_2.dart';
+import 'components/synced_scrolling_icons.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -19,39 +18,23 @@ class _IntroScreenState extends State<IntroScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 260),
+          const SizedBox(height: 260),
+          // 5. Use the new, single widget here
           SizedBox(
             height: 250,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Positioned(
-                  top: 100,
-                  left: 30,
-                  right: 0,
-                  child: AutoScrollingIcons(sizeOfIcons: 45,),
-                ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 100,
-                  child: AutoScrollingIcons2(sizeOfIcons: 45),
-                ),
-              ],
-            ),
+            child: SyncedScrollingIcons(iconSize: 45),
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
 
           Text(
-            "Welcome to remyn",
+            "Welcome to Remyn",
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
               color: colorScheme.onSurface.withOpacity(0.7),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             "Reminders made simple, easily set and track",
             style: TextStyle(
@@ -67,7 +50,7 @@ class _IntroScreenState extends State<IntroScreen> {
             ),
           ),
 
-          Spacer(),
+          const Spacer(),
 
           GestureDetector(
             onHorizontalDragEnd: (details) {
@@ -75,8 +58,8 @@ class _IntroScreenState extends State<IntroScreen> {
             },
             child: Container(
               width: MediaQuery.of(context).size.width * 0.8,
-              margin: EdgeInsets.only(bottom: 40),
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              margin: const EdgeInsets.only(bottom: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(color: colorScheme.onSurface.withOpacity(0.7), width: 2),
@@ -90,7 +73,7 @@ class _IntroScreenState extends State<IntroScreen> {
                     "Swipe to Start",
                     style: TextStyle(fontSize: 18, color: colorScheme.surface),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Icon(Icons.arrow_forward, color: colorScheme.surface),
                 ],
               ),

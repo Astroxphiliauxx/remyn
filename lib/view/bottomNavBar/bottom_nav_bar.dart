@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'home_tab.dart';
+import 'reminders_tab.dart';
+import 'profile_tab.dart';
 
-import 'bottomNavBar/home_tab.dart';
-import 'bottomNavBar/reminders_tab.dart';
-import 'bottomNavBar/profile_tab.dart';
-
-class HomeScreen extends StatefulWidget {
+class BottomNavBar extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _BottomNavBarState createState() => _BottomNavBarState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
