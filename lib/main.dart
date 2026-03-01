@@ -7,14 +7,13 @@ import 'app_theme/app_theme.dart';
 import 'controller/color_provider.dart';
 import 'controller/icon_provider.dart';
 import 'controller/theme_provider.dart';
-import 'view/create_reminder.dart';
+import 'view/create_reminder/create_reminder_page.dart';
 import 'view/bottomNavBar/bottom_nav_bar.dart';
 import 'view/intro_screen.dart';
-import 'view/settings_page.dart';
+import 'view/settings_page/settings_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     sqfliteFfiInit();

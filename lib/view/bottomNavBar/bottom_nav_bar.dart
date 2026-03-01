@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home_tab.dart';
-import 'reminders_tab.dart';
-import 'profile_tab.dart';
+import 'widgets/screens/home_tab.dart';
+import 'widgets/screens/reminders_tab.dart';
+import 'widgets/screens/profile_tab.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -30,7 +30,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
         unselectedFontSize: 15,
         selectedItemColor: colorScheme.onSurface,
         unselectedItemColor: colorScheme.onSurface.withOpacity(0.6),
-
         onTap: (index) {
           setState(() {
             _currentIndex = index;

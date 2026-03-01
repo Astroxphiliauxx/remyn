@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../components/auto_scrolling_icons.dart';
+import '../../../components/auto_scrolling_icons.dart';
 
 class RemindersTab extends StatelessWidget {
   @override
