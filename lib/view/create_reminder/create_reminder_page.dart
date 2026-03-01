@@ -70,16 +70,16 @@ class _NewReminderPageState extends State<NewReminderPage> {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: SizedBox(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
                         height: 75,
                         child: TextField(
                           controller: _titleController,
@@ -99,81 +99,83 @@ class _NewReminderPageState extends State<NewReminderPage> {
                           ),
                         ),
                       ),
-                    ),
-                    ToggleTile(
-                      title: "Interval",
-                      value: interval,
-                      onChanged: (value) {
-                        setState(() {
-                          interval = false;
-                          dateTime = false;
-                          weekday = false;
-                          if (value) interval = true;
-                          if (!value) selectedInterval = null;
-                        });
-                      },
-                    ),
-                    if (interval)
-                      IntervalOptions(
-                        intervalOptions: intervalOptions,
-                        selectedInterval: selectedInterval,
-                        onSelected: (value) =>
-                            setState(() => selectedInterval = value),
+                      SizedBox(height: 20),
+                      ToggleTile(
+                        title: "Interval",
+                        value: interval,
+                        onChanged: (value) {
+                          setState(() {
+                            interval = false;
+                            dateTime = false;
+                            weekday = false;
+                            if (value) interval = true;
+                            if (!value) selectedInterval = null;
+                          });
+                        },
                       ),
-                    ToggleTile(
-                      title: "Date & time",
-                      value: dateTime,
-                      onChanged: (value) {
-                        setState(() {
-                          interval = false;
-                          dateTime = false;
-                          weekday = false;
-                          if (value) dateTime = true;
-                        });
-                      },
-                    ),
-                    ToggleTile(
-                      title: "Weekday",
-                      value: weekday,
-                      onChanged: (value) {
-                        setState(() {
-                          interval = false;
-                          dateTime = false;
-                          weekday = false;
-                          if (value) weekday = true;
-                        });
-                      },
-                    ),
-                    ToggleTile(
-                      title: "Repeating",
-                      value: repeating,
-                      onChanged: (value) => setState(() => repeating = value),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 5.0),
-                      child: IconTile(),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      child: Text("Color",
-                          style: TextStyle(
-                              color: colorScheme.onSurface,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                    SizedBox(height: 5),
-                    ColorPicker(colors: colors),
-                    SizedBox(height: 20),
-                  ],
+                      if (interval)
+                        IntervalOptions(
+                          intervalOptions: intervalOptions,
+                          selectedInterval: selectedInterval,
+                          onSelected: (value) =>
+                              setState(() => selectedInterval = value),
+                        ),
+                      SizedBox(height: 8),
+                      ToggleTile(
+                        title: "Date & time",
+                        value: dateTime,
+                        onChanged: (value) {
+                          setState(() {
+                            interval = false;
+                            dateTime = false;
+                            weekday = false;
+                            if (value) dateTime = true;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 8),
+                      ToggleTile(
+                        title: "Weekday",
+                        value: weekday,
+                        onChanged: (value) {
+                          setState(() {
+                            interval = false;
+                            dateTime = false;
+                            weekday = false;
+                            if (value) weekday = true;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 8),
+                      ToggleTile(
+                        title: "Repeating",
+                        value: repeating,
+                        onChanged: (value) => setState(() => repeating = value),
+                      ),
+                      SizedBox(height: 8),
+                      IconTile(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: Text("Color",
+                            style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      SizedBox(height: 5),
+                      ColorPicker(colors: colors),
+                      SizedBox(height: 20),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SaveReminderButton(
-              onPressed: () => _saveReminder(_titleController.text.toString()),
-            ),
-          ],
+              SaveReminderButton(
+                onPressed: () =>
+                    _saveReminder(_titleController.text.toString()),
+              ),
+            ],
+          ),
         ),
       ),
     );

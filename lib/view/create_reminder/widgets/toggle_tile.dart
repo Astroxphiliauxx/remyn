@@ -19,35 +19,40 @@ class ToggleTile extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final colorProvider = Provider.of<ColorProvider>(context);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-      child: Container(
-        height: 75,
-        decoration: BoxDecoration(
-          color: colorScheme.secondary,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    color: colorScheme.onSurface,
-                    fontSize: 20,
-                  ),
+    return Container(
+      height: 75,
+      decoration: BoxDecoration(
+        color: colorScheme.secondary,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: colorScheme.onSurface,
+                  fontSize: 20,
                 ),
               ),
             ),
-            Switch(
-              activeColor: colorProvider.selectedColor,
-              value: value,
-              onChanged: onChanged,
-            ),
-          ],
-        ),
+          ),
+          Switch(
+            thumbColor: WidgetStateProperty.all(colorScheme.onSurface),
+            trackColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.selected)) {
+                return colorProvider.selectedColor;
+              }
+              return colorScheme.secondary;
+            }),
+            trackOutlineColor:
+                WidgetStateProperty.all(colorScheme.onSurface),
+            value: value,
+            onChanged: onChanged,
+          ),
+        ],
       ),
     );
   }
