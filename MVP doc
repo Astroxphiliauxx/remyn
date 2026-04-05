@@ -1,0 +1,269 @@
+# Discipline Alarm App – MVP Documentation
+
+## 📌 Overview
+
+**Discipline Alarm** is not a traditional alarm app.
+It is a **behavior-enforcing system** that forces users to physically wake up and complete a task to stop the alarm.
+
+The app is designed to eliminate snoozing behavior by introducing:
+
+* Physical movement
+* Streak-based motivation
+* Penalty-driven accountability
+
+---
+
+## 🎯 Core Concept
+
+> “You can’t snooze. You have to MOVE.”
+
+When the alarm rings, the user must complete a **real-world action**:
+
+* Scan a QR code
+* Walk a certain number of steps
+* Take a proof photo
+
+Failure results in:
+
+* Streak loss
+* Penalty actions
+
+---
+
+## 🧱 MVP Features
+
+### 1. ⏰ Alarm System
+
+* Set alarm time
+* Repeat options (daily, weekdays, custom)
+* Multiple alarms support
+
+---
+
+### 2. 🧍 Proof of Wake-up (Core Feature)
+
+User must complete **one selected task** to stop alarm:
+
+#### Options:
+
+* 📷 Scan QR Code (placed in bathroom/kitchen)
+* 🚶 Walk X steps (e.g., 30–50 steps)
+* 📸 Take a photo (basic validation)
+
+#### Behavior:
+
+* Alarm keeps ringing until task is completed
+* No snooze option
+
+---
+
+### 3. 🔥 Streak System
+
+* Daily success → streak +1
+* Failure → streak resets to 0
+
+#### Milestones:
+
+* 3 days → Beginner 🔹
+* 7 days → Consistent 🔥
+* 30 days → Elite 👑
+
+---
+
+### 4. 💀 Penalty System
+
+If user fails to complete task:
+
+* Streak resets
+* Alarm continues aggressively
+* Optional:
+
+  * Annoying sound loop
+  * “Failure message” (funny/savage)
+
+---
+
+### 5. 🎚 Difficulty Levels
+
+#### Easy:
+
+* Shake phone
+* Solve simple task
+
+#### Medium:
+
+* Walk 30–50 steps
+
+#### Hard:
+
+* Scan QR code from another room
+
+---
+
+### 6. 😈 Personality Layer (Fun Element)
+
+* Funny / savage messages:
+
+  * “You failed. Again.”
+  * “Your goals are sleeping with you.”
+* Optional voice alerts
+
+---
+
+## 📱 Screens (UI Structure)
+
+### 1. Home Screen
+
+* Today’s alarm
+* Current streak 🔥
+* Quick stats
+
+---
+
+### 2. Alarm Setup Screen
+
+* Time picker
+* Repeat options
+* Difficulty selection
+* Task selection (QR / Steps / Photo)
+
+---
+
+### 3. Alarm Ring Screen (Critical UX)
+
+* Full-screen takeover
+* Loud sound
+* Task instructions:
+
+  * “Scan your bathroom QR”
+* No exit until completed
+
+---
+
+### 4. Streak & Stats Screen
+
+* Current streak
+* Best streak
+* Weekly performance
+
+---
+
+### 5. Settings Screen
+
+* Sound selection
+* Difficulty default
+* Toggle savage messages 😄
+
+---
+
+## 🧠 Core User Flow
+
+1. User sets alarm
+2. Alarm rings
+3. User must complete task
+4. If success:
+
+   * Alarm stops
+   * Streak increases
+5. If failure:
+
+   * Alarm continues / penalty triggered
+   * Streak resets
+
+---
+
+## ⚙️ Tech Considerations (Flutter)
+
+### Key Packages:
+
+* `flutter_local_notifications` → alarms
+* `mobile_scanner` → QR scanning
+* `pedometer` → step tracking
+* `camera` → photo capture
+* `shared_preferences` / `hive` → local storage
+
+---
+
+### State Management:
+
+* Provider / Riverpod (recommended)
+
+---
+
+### Background Execution:
+
+* Ensure alarm works when app is closed
+* Use foreground service (Android)
+
+---
+
+## 🚀 Unique Selling Point (USP)
+
+* Forces **physical movement**
+* Removes **snooze behavior**
+* Combines **discipline + psychology + humor**
+
+---
+
+## 🎥 Marketing Angle
+
+### Hook:
+
+> “This app won’t let you be lazy.”
+
+### Demo Idea:
+
+* User sleeping 😴
+* Alarm screams:
+  “GO SCAN YOUR BATHROOM RIGHT NOW”
+* User runs 😂
+
+---
+
+## ⚠️ What NOT to Build (MVP Scope Control)
+
+* ❌ No AI features
+* ❌ No payments/rewards system
+* ❌ No social features (initially)
+* ❌ No over-complicated UI
+
+---
+
+## 📅 Development Plan (Suggested)
+
+### Week 1:
+
+* Alarm system
+* Basic UI
+
+### Week 2:
+
+* QR + Steps integration
+* Alarm blocking screen
+
+### Week 3:
+
+* Streak system
+* Polish UI + testing
+
+---
+
+## 🧩 Future Scope (Post-MVP)
+
+* Social accountability (friends)
+* Stake-based penalties (money)
+* AI-based wake-up insights
+* Gamification levels & rewards
+
+---
+
+## 🔥 Final Vision
+
+This app should feel like:
+
+> “I hate using it… but it works.”
+
+If users complain but keep using it —
+👉 **You’ve built a winning product.**
+
+---
