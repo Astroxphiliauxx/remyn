@@ -10,7 +10,7 @@ class RemindersTab extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorScheme.surface,
       appBar: CupertinoNavigationBar(
-        backgroundColor: colorScheme.surface.withOpacity(0.9),
+        backgroundColor: colorScheme.surface.withValues(alpha: 0.9),
         middle: Text(
           "Reminders",
           style: TextStyle(

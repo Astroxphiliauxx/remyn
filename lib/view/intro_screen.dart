@@ -31,7 +31,7 @@ class _IntroScreenState extends State<IntroScreen> {
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           const SizedBox(height: 10),
@@ -39,14 +39,14 @@ class _IntroScreenState extends State<IntroScreen> {
             "Reminders made simple, easily set and track",
             style: TextStyle(
               fontSize: 18,
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           Text(
             "reminders without a hassle.",
             style: TextStyle(
               fontSize: 18,
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
 
@@ -62,7 +62,7 @@ class _IntroScreenState extends State<IntroScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: colorScheme.onSurface.withOpacity(0.7), width: 2),
+                border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.7), width: 2),
                 color: colorScheme.onSurface,
               ),
               child: Row(
