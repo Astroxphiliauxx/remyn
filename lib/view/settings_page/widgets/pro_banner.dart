@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../app_theme/app_typography.dart';
+
 class ProBanner extends StatelessWidget {
   const ProBanner({super.key});
 
@@ -22,15 +24,18 @@ class ProBanner extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Not active",
-                    style:
-                        TextStyle(color: colorScheme.onSurface, fontSize: 14)),
+                Text(
+                  "Not active",
+                  style: AppTypography.label.copyWith(color: colorScheme.onSurface),
+                ),
                 SizedBox(height: 4),
-                Text("Remyn Pro",
-                    style: TextStyle(
-                        color: colorScheme.onSurface,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600)),
+                Text(
+                  "Remyn Pro",
+                  style: AppTypography.body.copyWith(
+                    color: colorScheme.onSurface,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             ),
             Icon(CupertinoIcons.right_chevron,

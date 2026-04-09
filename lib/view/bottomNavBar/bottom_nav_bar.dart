@@ -26,8 +26,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: colorScheme.surface,
         currentIndex: _currentIndex,
-        selectedFontSize: 20,
-        unselectedFontSize: 15,
+        selectedFontSize: 18,
+        unselectedFontSize: 14,
         selectedItemColor: colorScheme.onSurface,
         unselectedItemColor: colorScheme.onSurface.withValues(alpha: 0.6),
         onTap: (index) {

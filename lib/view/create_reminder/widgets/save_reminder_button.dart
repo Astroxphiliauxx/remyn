@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../app_theme/app_typography.dart';
 import '../../../controller/color_provider.dart';
 
 class SaveReminderButton extends StatelessWidget {
@@ -29,8 +31,10 @@ class SaveReminderButton extends StatelessWidget {
           children: [
             Icon(CupertinoIcons.add, color: colorScheme.onPrimary),
             SizedBox(width: 8),
-            Text("Create reminder",
-                style: TextStyle(color: colorScheme.onPrimary, fontSize: 18)),
+            Text(
+              "Create reminder",
+              style: AppTypography.body.copyWith(color: colorScheme.onPrimary),
+            ),
           ],
         ),
       ),

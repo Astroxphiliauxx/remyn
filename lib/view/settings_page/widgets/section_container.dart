@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../app_theme/app_typography.dart';
+
 class SectionContainer extends StatelessWidget {
   final String title;
   final List<Widget> children;
@@ -18,11 +20,13 @@ class SectionContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,
-              style: TextStyle(
-                  color: colorScheme.onSurface,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600)),
+          Text(
+            title,
+            style: AppTypography.body.copyWith(
+              color: colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           SizedBox(height: 8),
           Container(
             decoration: BoxDecoration(

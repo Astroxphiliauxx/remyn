@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../app_theme/app_typography.dart';
 import '../../../controller/color_provider.dart';
 
 class ToggleTile extends StatelessWidget {
@@ -32,10 +34,7 @@ class ToggleTile extends StatelessWidget {
               padding: const EdgeInsets.only(left: 16.0),
               child: Text(
                 title,
-                style: TextStyle(
-                  color: colorScheme.onSurface,
-                  fontSize: 20,
-                ),
+                style: AppTypography.body.copyWith(color: colorScheme.onSurface),
               ),
             ),
           ),

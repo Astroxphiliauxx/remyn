@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../app_theme/app_typography.dart';
 import '../../../controller/color_provider.dart';
 
 class IntervalOptions extends StatelessWidget {
@@ -31,10 +33,9 @@ class IntervalOptions extends StatelessWidget {
           SizedBox(height: 8),
           Text(
             "Select Interval",
-            style: TextStyle(
+            style: AppTypography.label.copyWith(
               color: colorScheme.onSurface,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
             ),
           ),
           SizedBox(height: 8),
@@ -49,7 +50,7 @@ class IntervalOptions extends StatelessWidget {
                   onSelected(selected ? minutes : null);
                 },
                 selectedColor: colorProvider.selectedColor,
-                labelStyle: TextStyle(
+                labelStyle: AppTypography.label.copyWith(
                   color: selectedInterval == minutes
                       ? colorScheme.onPrimary
                       : colorScheme.onSurface,

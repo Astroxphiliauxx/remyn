@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../app_theme/app_typography.dart';
 import '../../../components/auto_scrolling_icons.dart';
 
 class RemindersTab extends StatelessWidget {
@@ -13,9 +15,8 @@ class RemindersTab extends StatelessWidget {
         backgroundColor: colorScheme.surface.withValues(alpha: 0.9),
         middle: Text(
           "Reminders",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+          style: AppTypography.body.copyWith(
+            fontWeight: FontWeight.w700,
             color: colorScheme.onSurface,
           ),
         ),
@@ -63,10 +64,7 @@ class RemindersTab extends StatelessWidget {
           SizedBox(height: 60),
           Text(
             "No Reminders Yet",
-            style: TextStyle(
-              color: colorScheme.onSurface,
-              fontSize: 16,
-            ),
+            style: AppTypography.label.copyWith(color: colorScheme.onSurface),
           ),
           SizedBox(height: 20),
           GestureDetector(
@@ -84,10 +82,7 @@ class RemindersTab extends StatelessWidget {
               child: Center(
                 child: Text(
                   "+   Create Reminder",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: colorScheme.surface,
-                  ),
+                  style: AppTypography.body.copyWith(color: colorScheme.surface),
                 ),
               ),
             ),

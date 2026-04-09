@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../app_theme/app_typography.dart';
+
 class ReminderCard extends StatelessWidget {
   final Map<String, dynamic> reminder;
   final VoidCallback onDelete;
@@ -27,9 +29,8 @@ class ReminderCard extends StatelessWidget {
       ),
       title: Text(
         reminder['title'],
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+        style: AppTypography.body.copyWith(
+          fontWeight: FontWeight.w700,
           color: colorScheme.onPrimary,
         ),
       ),
@@ -39,22 +40,26 @@ class ReminderCard extends StatelessWidget {
           if (reminder['interval'] == 1)
             Text(
               'Every ${reminder['interval_minutes']} minutes',
-              style: TextStyle(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
+              style: AppTypography.label
+                  .copyWith(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
             ),
           if (reminder['dateTime'] == 1)
             Text(
               'Specific Time',
-              style: TextStyle(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
+              style: AppTypography.label
+                  .copyWith(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
             ),
           if (reminder['weekday'] == 1)
             Text(
               'Weekly',
-              style: TextStyle(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
+              style: AppTypography.label
+                  .copyWith(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
             ),
           if (reminder['repeating'] == 1)
             Text(
               'Repeating',
-              style: TextStyle(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
+              style: AppTypography.label
+                  .copyWith(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
             ),
         ],
       ),

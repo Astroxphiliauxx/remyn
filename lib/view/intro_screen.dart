@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../app_theme/app_typography.dart';
 import 'components/synced_scrolling_icons.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -28,24 +30,20 @@ class _IntroScreenState extends State<IntroScreen> {
 
           Text(
             "Welcome to Remyn",
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+            style: AppTypography.display.copyWith(
               color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           const SizedBox(height: 10),
           Text(
             "Reminders made simple, easily set and track",
-            style: TextStyle(
-              fontSize: 18,
+            style: AppTypography.body.copyWith(
               color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           Text(
             "reminders without a hassle.",
-            style: TextStyle(
-              fontSize: 18,
+            style: AppTypography.body.copyWith(
               color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
@@ -71,7 +69,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 children: [
                   Text(
                     "Swipe to Start",
-                    style: TextStyle(fontSize: 18, color: colorScheme.surface),
+                    style: AppTypography.body.copyWith(color: colorScheme.surface),
                   ),
                   const SizedBox(width: 10),
                   Icon(Icons.arrow_forward, color: colorScheme.surface),

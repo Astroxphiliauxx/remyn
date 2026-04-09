@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../app_theme/app_typography.dart';
 import '../../../controller/color_provider.dart';
 import '../../../controller/icon_provider.dart';
 import '../../components/icon_picker.dart';
@@ -28,10 +30,7 @@ class IconTile extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 23.0),
                 child: Text(
                   "Icon",
-                  style: TextStyle(
-                    color: colorScheme.onSurface,
-                    fontSize: 20,
-                  ),
+                  style: AppTypography.body.copyWith(color: colorScheme.onSurface),
                 ),
               ),
             ),

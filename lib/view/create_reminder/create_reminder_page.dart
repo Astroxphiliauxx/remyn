@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../app_theme/app_typography.dart';
 import '../../controller/color_provider.dart';
 import '../../controller/icon_provider.dart';
 import '../../model/database_helper.dart';
@@ -63,10 +65,7 @@ class _NewReminderPageState extends State<NewReminderPage> {
         ),
         title: Text(
           "New Reminder",
-          style: TextStyle(
-              color: colorScheme.onSurface,
-              fontSize: 22,
-              fontWeight: FontWeight.bold),
+          style: AppTypography.title.copyWith(color: colorScheme.onSurface),
         ),
       ),
       body: SafeArea(
@@ -83,13 +82,14 @@ class _NewReminderPageState extends State<NewReminderPage> {
                         height: 75,
                         child: TextField(
                           controller: _titleController,
-                          style: TextStyle(color: colorScheme.onSurface),
+                          style:
+                              AppTypography.body.copyWith(color: colorScheme.onSurface),
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: colorProvider.selectedColor,
                             hintText: "Reminder",
-                            hintStyle: TextStyle(
-                                color: colorScheme.onSurface, fontSize: 20),
+                            hintStyle: AppTypography.body
+                                .copyWith(color: colorScheme.onSurface),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide.none,
@@ -157,11 +157,12 @@ class _NewReminderPageState extends State<NewReminderPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 8.0),
-                        child: Text("Color",
-                            style: TextStyle(
-                                color: colorScheme.onSurface,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold)),
+                        child: Text(
+                            "Color",
+                            style: AppTypography.body.copyWith(
+                              color: colorScheme.onSurface,
+                              fontWeight: FontWeight.w700,
+                            )),
                       ),
                       SizedBox(height: 5),
                       ColorPicker(colors: colors),

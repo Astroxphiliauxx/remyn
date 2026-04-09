@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../app_theme/app_typography.dart';
 import '../../controller/theme_provider.dart';
 import 'widgets/section_container.dart';
 import 'widgets/settings_list_tile.dart';
@@ -22,10 +24,7 @@ class SettingsPage extends StatelessWidget {
         ),
         middle: Text(
           "Settings",
-          style: TextStyle(
-              color: colorScheme.onSurface,
-              fontSize: 22,
-              fontWeight: FontWeight.bold),
+          style: AppTypography.title.copyWith(color: colorScheme.onSurface),
         ),
       ),
       body: SafeArea(
