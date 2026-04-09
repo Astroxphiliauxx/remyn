@@ -95,7 +95,7 @@ class SettingsPage extends StatelessWidget {
   Widget _buildDivider(ColorScheme colorScheme) {
     return Container(
       height: 0.5,
-      color: colorScheme.onSurface.withOpacity(0.3),
+      color: colorScheme.onSurface.withValues(alpha: 0.3),
     );
   }
 

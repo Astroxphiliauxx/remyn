@@ -111,7 +111,7 @@ class _AutoScrollingIconsState extends State<AutoScrollingIcons> {
   }
 
   Color _getFadedColor(Color color) {
-    return color.withOpacity(0.4);
+    return color.withValues(alpha: 0.4);
   }
 
   @override

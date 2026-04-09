@@ -192,7 +192,7 @@ class _NewReminderPageState extends State<NewReminderPage> {
       'dateTime': dateTime ? 1 : 0,
       'weekday': weekday ? 1 : 0,
       'repeating': repeating ? 1 : 0,
-      'color': colorProvider.selectedColor.value,
+      'color': colorProvider.selectedColor.toARGB32(),
       'icon_code': iconProvider.selectedIcon.codePoint,
     });
 

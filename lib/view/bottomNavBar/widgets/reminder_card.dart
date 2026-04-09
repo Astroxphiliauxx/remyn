@@ -39,22 +39,22 @@ class ReminderCard extends StatelessWidget {
           if (reminder['interval'] == 1)
             Text(
               'Every ${reminder['interval_minutes']} minutes',
-              style: TextStyle(color: colorScheme.onPrimary.withOpacity(0.8)),
+              style: TextStyle(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
             ),
           if (reminder['dateTime'] == 1)
             Text(
               'Specific Time',
-              style: TextStyle(color: colorScheme.onPrimary.withOpacity(0.8)),
+              style: TextStyle(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
             ),
           if (reminder['weekday'] == 1)
             Text(
               'Weekly',
-              style: TextStyle(color: colorScheme.onPrimary.withOpacity(0.8)),
+              style: TextStyle(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
             ),
           if (reminder['repeating'] == 1)
             Text(
               'Repeating',
-              style: TextStyle(color: colorScheme.onPrimary.withOpacity(0.8)),
+              style: TextStyle(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
             ),
         ],
       ),

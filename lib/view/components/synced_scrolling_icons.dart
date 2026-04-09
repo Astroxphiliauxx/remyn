@@ -168,7 +168,7 @@ class _ScrollingIconList extends StatelessWidget {
         itemBuilder: (context, index) {
           final color1 = colors[index];
           // color2 is no longer used for drawing a partial arc, but the painter might still need it
-          final color2 = color1.withOpacity(0.4);
+          final color2 = color1.withValues(alpha: 0.4);
           final arcRatio = arcRatios[index];
 
           return Container(

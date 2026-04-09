@@ -29,7 +29,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         selectedFontSize: 20,
         unselectedFontSize: 15,
         selectedItemColor: colorScheme.onSurface,
-        unselectedItemColor: colorScheme.onSurface.withOpacity(0.6),
+        unselectedItemColor: colorScheme.onSurface.withValues(alpha: 0.6),
         onTap: (index) {
           setState(() {
             _currentIndex = index;
