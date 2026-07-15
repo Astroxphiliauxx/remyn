@@ -6,6 +6,7 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'app_theme/app_theme.dart';
 import 'controller/color_provider.dart';
 import 'controller/icon_provider.dart';
+import 'controller/reminders_provider.dart';
 import 'controller/theme_provider.dart';
 import 'view/create_reminder/create_reminder_page.dart';
 import 'view/bottomNavBar/bottom_nav_bar.dart';
@@ -28,6 +29,9 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => ColorProvider()),
         ChangeNotifierProvider(create: (_) => IconProvider()),
+        ChangeNotifierProvider(
+          create: (_) => RemindersProvider()..loadReminders(),
+        ),
       ],
       child: MyApp(),
     ),

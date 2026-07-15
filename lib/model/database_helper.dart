@@ -27,7 +27,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 2, 
+      version: 3,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE reminders(
@@ -39,22 +39,25 @@ class DatabaseHelper {
             weekday INTEGER NOT NULL,  
             repeating INTEGER NOT NULL,
             color INTEGER NOT NULL,
-            icon_code INTEGER NOT NULL
+            icon_code INTEGER NOT NULL,
+            scheduled_at_ms INTEGER
           )
         ''');
       },
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
-         
           await db.transaction((txn) async {
-           
             await txn.execute(
-              'ALTER TABLE reminders ADD COLUMN interval_minutes INTEGER DEFAULT 0');
+                'ALTER TABLE reminders ADD COLUMN interval_minutes INTEGER DEFAULT 0');
             await txn.execute(
-              'ALTER TABLE reminders ADD COLUMN color INTEGER NOT NULL DEFAULT 0xFF2196F3'); 
+                'ALTER TABLE reminders ADD COLUMN color INTEGER NOT NULL DEFAULT 0xFF2196F3');
             await txn.execute(
-              'ALTER TABLE reminders ADD COLUMN icon_code INTEGER NOT NULL DEFAULT 0xe3a3'); 
+                'ALTER TABLE reminders ADD COLUMN icon_code INTEGER NOT NULL DEFAULT 0xe3a3');
           });
+        }
+        if (oldVersion < 3) {
+          await db.execute(
+              'ALTER TABLE reminders ADD COLUMN scheduled_at_ms INTEGER');
         }
       },
     );
