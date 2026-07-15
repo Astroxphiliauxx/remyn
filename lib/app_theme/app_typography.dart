@@ -18,4 +18,8 @@ abstract final class AppTypography {
   /// Captions, secondary lines, chips (14).
   static TextStyle get label =>
       GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400);
+
+  /// Editorial serif titles for reminder cards and page headings (28).
+  static TextStyle get editorialTitle =>
+      GoogleFonts.playfairDisplay(fontSize: 28, fontWeight: FontWeight.w700);
 }

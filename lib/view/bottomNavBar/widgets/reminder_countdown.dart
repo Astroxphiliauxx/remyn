@@ -16,19 +16,34 @@ bool isCountdownDue(DateTime targetAt, DateTime now) =>
 /// Formats a non-negative [remaining] duration for countdown display.
 String formatCountdown(Duration remaining) {
   final totalSeconds = remaining.inSeconds;
-  final hours = totalSeconds ~/ 3600;
+  final days = totalSeconds ~/ 86400;
+  final hours = (totalSeconds % 86400) ~/ 3600;
   final minutes = (totalSeconds % 3600) ~/ 60;
   final seconds = totalSeconds % 60;
-  if (hours > 0) {
-    return '$hours:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+
+  if (days > 0) {
+    return '$days'
+        'D ${hours.toString().padLeft(2, '0')}:'
+        '${minutes.toString().padLeft(2, '0')}:'
+        '${seconds.toString().padLeft(2, '0')}';
   }
-  return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  if (hours > 0) {
+    return '${hours.toString().padLeft(2, '0')}:'
+        '${minutes.toString().padLeft(2, '0')}:'
+        '${seconds.toString().padLeft(2, '0')}';
+  }
+  return '${minutes.toString().padLeft(2, '0')}:'
+      '${seconds.toString().padLeft(2, '0')}';
 }
 
 String countdownSemanticsLabel(Duration remaining) {
   if (remaining.inSeconds <= 0) return 'Due now';
-  final hours = remaining.inHours;
+  final days = remaining.inDays;
+  final hours = remaining.inHours % 24;
   final minutes = remaining.inMinutes % 60;
+  if (days > 0) {
+    return 'Due in $days days $hours hours $minutes minutes';
+  }
   if (hours > 0) {
     return 'Due in $hours hours $minutes minutes';
   }
@@ -40,12 +55,12 @@ String countdownSemanticsLabel(Duration remaining) {
 
 class ReminderCountdownBadge extends StatefulWidget {
   final DateTime targetAt;
-  final Color textColor;
+  final Color accentColor;
 
   const ReminderCountdownBadge({
     super.key,
     required this.targetAt,
-    required this.textColor,
+    required this.accentColor,
   });
 
   @override
@@ -79,8 +94,7 @@ class _ReminderCountdownBadgeState extends State<ReminderCountdownBadge> {
   }
 
   void _tick() {
-    final nextRemaining =
-        countdownRemaining(widget.targetAt, DateTime.now());
+    final nextRemaining = countdownRemaining(widget.targetAt, DateTime.now());
     final nextSemantics = countdownSemanticsLabel(nextRemaining);
 
     if (!mounted) return;
@@ -113,15 +127,16 @@ class _ReminderCountdownBadgeState extends State<ReminderCountdownBadge> {
           ? countdownSemanticsLabel(_remaining)
           : _semanticsLabel,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          color: widget.textColor.withValues(alpha: 0.2),
-          borderRadius: BorderRadius.circular(8),
+          color: widget.accentColor.withValues(alpha: 0.12),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: widget.accentColor, width: 1),
         ),
         child: Text(
           label,
           style: AppTypography.label.copyWith(
-            color: widget.textColor,
+            color: widget.accentColor,
             fontWeight: FontWeight.w700,
           ),
         ),

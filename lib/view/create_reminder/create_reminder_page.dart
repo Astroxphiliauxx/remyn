@@ -273,6 +273,7 @@ class _NewReminderPageState extends State<NewReminderPage> {
       'repeating': repeating ? 1 : 0,
       'color': colorProvider.selectedColor.toARGB32(),
       'icon_code': iconProvider.selectedIcon.codePoint,
+      'created_at_ms': DateTime.now().millisecondsSinceEpoch,
       if (dateTime && selectedDateTime != null)
         'scheduled_at_ms': selectedDateTime!.millisecondsSinceEpoch,
     });

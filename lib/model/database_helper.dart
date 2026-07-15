@@ -27,7 +27,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 3,
+      version: 4,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE reminders(
@@ -40,7 +40,8 @@ class DatabaseHelper {
             repeating INTEGER NOT NULL,
             color INTEGER NOT NULL,
             icon_code INTEGER NOT NULL,
-            scheduled_at_ms INTEGER
+            scheduled_at_ms INTEGER,
+            created_at_ms INTEGER
           )
         ''');
       },
@@ -58,6 +59,10 @@ class DatabaseHelper {
         if (oldVersion < 3) {
           await db.execute(
               'ALTER TABLE reminders ADD COLUMN scheduled_at_ms INTEGER');
+        }
+        if (oldVersion < 4) {
+          await db.execute(
+              'ALTER TABLE reminders ADD COLUMN created_at_ms INTEGER');
         }
       },
     );
