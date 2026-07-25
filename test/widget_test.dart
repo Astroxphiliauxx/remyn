@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:remyn/app_theme/app_theme.dart';
+import 'package:remyn/utils/schedule_date_format.dart';
 import 'package:remyn/view/bottomNavBar/widgets/reminder_card.dart';
 import 'package:remyn/view/bottomNavBar/widgets/reminder_countdown.dart';
 import 'package:remyn/view/bottomNavBar/widgets/reminder_progress_bar.dart';
@@ -86,6 +87,24 @@ void main() {
       expect(
         isCountdownDue(target, now.add(const Duration(minutes: 1))),
         isTrue,
+      );
+    });
+  });
+
+  group('ScheduleDateFormat', () {
+    test('uses ordinal suffixes', () {
+      expect(ScheduleDateFormat.ordinalSuffix(1), 'st');
+      expect(ScheduleDateFormat.ordinalSuffix(2), 'nd');
+      expect(ScheduleDateFormat.ordinalSuffix(3), 'rd');
+      expect(ScheduleDateFormat.ordinalSuffix(11), 'th');
+      expect(ScheduleDateFormat.ordinalSuffix(17), 'th');
+      expect(ScheduleDateFormat.ordinalSuffix(22), 'nd');
+    });
+
+    test('formats month and day', () {
+      expect(
+        ScheduleDateFormat.monthDay(DateTime(2026, 12, 17)),
+        'Dec 17',
       );
     });
   });

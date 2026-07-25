@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../app_theme/app_typography.dart';
+import '../../../utils/schedule_date_format.dart';
 import 'reminder_countdown.dart';
 import 'reminder_progress_bar.dart';
 
@@ -47,9 +48,9 @@ class ReminderCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: colorScheme.surface,
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-        ),
+              topLeft: Radius.circular(12),
+              topRight: Radius.circular(12),
+            ),
             border: Border.all(color: _accentColor, width: 1),
           ),
           child: Column(
@@ -70,12 +71,24 @@ class ReminderCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 6),
-                        Text(
-                          _subtitle(scheduledAt),
-                          style: AppTypography.label.copyWith(
-                            color: colorScheme.onSurface.withValues(alpha: 0.6),
+                        if (reminder['dateTime'] == 1 && scheduledAt != null)
+                          ScheduleDateFormat.richSubtitle(
+                            dateTime: scheduledAt,
+                            style: AppTypography.label.copyWith(
+                              color:
+                                  colorScheme.onSurface.withValues(alpha: 0.6),
+                            ),
+                            timeLabel:
+                                ScheduleDateFormat.formatTime12h(scheduledAt),
+                          )
+                        else
+                          Text(
+                            _subtitle(scheduledAt),
+                            style: AppTypography.label.copyWith(
+                              color:
+                                  colorScheme.onSurface.withValues(alpha: 0.6),
+                            ),
                           ),
-                        ),
                       ],
                     ),
                     if (showCountdown)
@@ -109,32 +122,8 @@ class ReminderCard extends StatelessWidget {
     if (reminder['interval'] == 1) {
       return 'Every ${reminder['interval_minutes']} minutes';
     }
-    if (reminder['dateTime'] == 1 && scheduledAt != null) {
-      return _formatScheduledAt(scheduledAt);
-    }
     if (reminder['weekday'] == 1) return 'Weekly';
     if (reminder['repeating'] == 1) return 'Repeating';
     return 'Reminder';
   }
-
-  String _formatScheduledAt(DateTime dateTime) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final scheduledDay = DateTime(dateTime.year, dateTime.month, dateTime.day);
-
-    if (scheduledDay == today) {
-      return 'Today, ${_formatTime(dateTime)}';
-    }
-
-    return 'Due ${_pad(dateTime.day)}-${_pad(dateTime.month)}'
-        '${dateTime.year.toString().substring(2)}, ${_formatTime(dateTime)}';
-  }
-
-  String _formatTime(DateTime dateTime) {
-    final hour = dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12;
-    final period = dateTime.hour >= 12 ? 'PM' : 'AM';
-    return '$hour:${_pad(dateTime.minute)} $period';
-  }
-
-  String _pad(int value) => value.toString().padLeft(2, '0');
 }

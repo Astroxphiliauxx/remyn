@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_theme/app_typography.dart';
+import '../../utils/schedule_date_format.dart';
 import '../../controller/color_provider.dart';
 import '../../controller/icon_provider.dart';
 import '../../controller/reminders_provider.dart';
@@ -303,9 +304,6 @@ class _DateTimeSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final formatted =
-        '${_pad(dateTime.day)}/${_pad(dateTime.month)}/${dateTime.year} '
-        '${_pad(dateTime.hour)}:${_pad(dateTime.minute)}';
 
     return Material(
       color: colorScheme.secondary,
@@ -320,11 +318,13 @@ class _DateTimeSummary extends StatelessWidget {
               Icon(Icons.schedule, color: colorScheme.onSurface),
               const SizedBox(width: 12),
               Expanded(
-                child: Text(
-                  formatted,
+                child: ScheduleDateFormat.richSubtitle(
+                  dateTime: dateTime,
                   style: AppTypography.body.copyWith(
                     color: colorScheme.onSurface,
                   ),
+                  timeLabel: ScheduleDateFormat.formatTime12h(dateTime),
+                  now: DateTime.now(),
                 ),
               ),
               Icon(Icons.edit,
@@ -335,6 +335,4 @@ class _DateTimeSummary extends StatelessWidget {
       ),
     );
   }
-
-  String _pad(int value) => value.toString().padLeft(2, '0');
 }
