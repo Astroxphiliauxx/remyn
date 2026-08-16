@@ -39,18 +39,10 @@ class ReminderCard extends StatelessWidget {
         onTap: () {
           // TODO: Open reminder details for edit/delete flow.
         },
-        //only top left and right rounded
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(12),
-          topRight: Radius.circular(12),
-        ),
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: colorScheme.surface,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12),
-              topRight: Radius.circular(12),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
             border: Border.all(color: _accentColor, width: 1),
           ),
           child: Column(
@@ -104,7 +96,7 @@ class ReminderCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+                padding: const EdgeInsets.fromLTRB(4, 1, 4, 1),
                 child: ReminderProgressBar(
                   createdAt: _createdAt,
                   scheduledAt: scheduledAt,

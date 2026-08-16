@@ -190,7 +190,28 @@ void main() {
 
       currentTime = scheduledAt;
       await tester.pump(const Duration(seconds: 1));
-      expect(fillConstraints().maxWidth, 0);
+      expect(find.byKey(const Key('reminder-progress-fill')), findsNothing);
+    });
+
+    testWidgets('hides when scheduled_at is past without created_at',
+        (tester) async {
+      final scheduledAt = DateTime(2026, 7, 14, 12);
+      final currentTime = scheduledAt;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ReminderProgressBar(
+              createdAt: null,
+              scheduledAt: scheduledAt,
+              accentColor: Colors.blue,
+              now: () => currentTime,
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byKey(const Key('reminder-progress-fill')), findsNothing);
     });
   });
 

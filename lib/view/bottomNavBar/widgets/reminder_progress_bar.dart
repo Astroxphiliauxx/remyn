@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'reminder_countdown.dart';
+
 typedef CurrentTime = DateTime Function();
 
 DateTime _systemNow() => DateTime.now();
@@ -112,6 +114,11 @@ class _ReminderProgressBarState extends State<ReminderProgressBar>
 
   @override
   Widget build(BuildContext context) {
+    final scheduledAt = widget.scheduledAt;
+    if (scheduledAt != null && isCountdownDue(scheduledAt, widget.now())) {
+      return const SizedBox.shrink();
+    }
+
     final percent = (_progress * 100).round();
 
     return Semantics(
