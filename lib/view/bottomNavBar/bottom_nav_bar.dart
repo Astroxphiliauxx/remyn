@@ -11,18 +11,19 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    HomeTab(),
-    RemindersTab(),
-    ProfileTab(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      body: _screens[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: [
+          HomeTab(),
+          RemindersTab(isActive: _currentIndex == 1),
+          ProfileTab(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: colorScheme.surface,
         currentIndex: _currentIndex,

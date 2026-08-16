@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:remyn/app_theme/app_theme.dart';
 import 'package:remyn/utils/schedule_date_format.dart';
+import 'package:remyn/view/components/glass_container.dart';
+import 'package:remyn/view/components/reminder_reveal_animation.dart';
 import 'package:remyn/view/bottomNavBar/widgets/reminder_card.dart';
 import 'package:remyn/view/bottomNavBar/widgets/reminder_countdown.dart';
 import 'package:remyn/view/bottomNavBar/widgets/reminder_progress_bar.dart';
@@ -215,6 +217,56 @@ void main() {
     });
   });
 
+  group('GlassContainer', () {
+    testWidgets('renders fake glass without BackdropFilter', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: GlassContainer(
+              child: const SizedBox(
+                width: 200,
+                height: 100,
+                child: Center(child: Text('Glass')),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byType(BackdropFilter), findsNothing);
+      expect(find.byType(GlassContainer), findsOneWidget);
+      expect(find.text('Glass'), findsOneWidget);
+    });
+  });
+
+  group('ReminderRevealAnimation', () {
+    testWidgets('fades in when revealed', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ReminderRevealAnimation(
+              index: 0,
+              trigger: 0,
+              revealed: true,
+              child: const Text('Reveal me'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      expect(find.text('Reveal me'), findsOneWidget);
+
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pump(const Duration(milliseconds: 400));
+
+      final opacity = tester.widget<FadeTransition>(
+        find.byType(FadeTransition),
+      );
+      expect(opacity.opacity.value, closeTo(1.0, 0.01));
+    });
+  });
+
   group('ReminderCard', () {
     final reminder = {
       'title': 'Morning Meditation',
@@ -249,6 +301,7 @@ void main() {
 
       expect(find.text('Morning Meditation'), findsOneWidget);
       expect(find.byType(ReminderProgressBar), findsOneWidget);
+      expect(find.byType(GlassContainer), findsOneWidget);
     });
 
     testWidgets('renders editorial title in dark theme', (tester) async {
@@ -256,6 +309,7 @@ void main() {
 
       expect(find.text('Morning Meditation'), findsOneWidget);
       expect(find.byType(ReminderCountdownBadge), findsOneWidget);
+      expect(find.byType(GlassContainer), findsOneWidget);
     });
   });
 }

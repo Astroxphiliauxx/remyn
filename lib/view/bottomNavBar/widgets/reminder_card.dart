@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app_theme/app_typography.dart';
 import '../../../utils/schedule_date_format.dart';
+import '../../components/glass_container.dart';
 import 'reminder_countdown.dart';
 import 'reminder_progress_bar.dart';
 
@@ -39,12 +40,9 @@ class ReminderCard extends StatelessWidget {
         onTap: () {
           // TODO: Open reminder details for edit/delete flow.
         },
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: colorScheme.surface,
-            borderRadius: BorderRadius.all(Radius.circular(12)),
-            border: Border.all(color: _accentColor, width: 1),
-          ),
+        child: GlassContainer(
+          borderRadius: 12,
+          borderColor: _accentColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
